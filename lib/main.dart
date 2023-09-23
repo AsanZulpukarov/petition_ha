@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:petition_ha/theme.dart';
 import 'package:petition_ha/view/profile/screen/profile_screen.dart';
+import 'package:petition_ha/view/splash_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
           home: child,
         );
       },
-      child: ProfileScreen(),
+      child: SplashPage(),
     );
   }
 }
