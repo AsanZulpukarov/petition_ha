@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:petition_ha/home/home_screen.dart';
 import 'package:petition_ha/service/api_service.dart';
-import 'package:petition_ha/view/profile/screen/profile_screen.dart';
 import 'package:provider/provider.dart';
 
+import '../../../fetches/local_service_user.dart';
 import '../../../provider/selectCatProvider.dart';
 import '../sing_up/sing_up_screen.dart';
-
 
 class SingInScreen extends StatefulWidget {
   const SingInScreen({Key? key}) : super(key: key);
@@ -17,11 +17,11 @@ class SingInScreen extends StatefulWidget {
 }
 
 class _SingInScreenState extends State<SingInScreen> {
-  TextEditingController email = TextEditingController();
-  TextEditingController password = TextEditingController();
-  TextEditingController ip=TextEditingController();
+  TextEditingController email = TextEditingController(text: "user@a.kg");
+  TextEditingController password = TextEditingController(text: "123");
+  TextEditingController ip = TextEditingController(text: '192.168.0.192');
   bool showPassword = false;
-  bool circular=false;
+  bool circular = false;
 
   phoneField() {
     return Container(
@@ -59,6 +59,7 @@ class _SingInScreenState extends State<SingInScreen> {
       ),
     );
   }
+
   ipField() {
     return Container(
       width: 300,
@@ -255,33 +256,29 @@ class _SingInScreenState extends State<SingInScreen> {
               ),
               InkWell(
                 onTap: () async {
-                  ApiService.ip=ip.text;
-                  circular=true;
-                  setState(() {
-
-                  });
+                  ApiService.ip = ip.text;
+                  circular = true;
+                  setState(() {});
                   String ans =
                       await ApiService().postSingIn(email.text, password.text);
-                  if (ans == 'true'){
-                    circular=false;
-                    setState(() {
-
-                    });
+                  if (ans == 'true') {
+                    circular = false;
+                    setState(() {});
                     showToast('Вход выполнен!');
-                    Provider.of<SelectCatProvider>(context,listen: false).setEmail(email.text);
-                    Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(builder: (_) => ProfileScreen()));}
-                  else if (ans == 'password') {
-                    circular=false;
-                    setState(() {
-
-                    });
+                    await fetchSetUserEmail(email.text);
+                    Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(
+                        builder: (_) => Home(),
+                      ),
+                      (Route<dynamic> route) => false,
+                    );
+                  } else if (ans == 'password') {
+                    circular = false;
+                    setState(() {});
                     cancelToast('Неправильный пароль!');
                   } else {
-                    circular=false;
-                    setState(() {
-
-                    });
+                    circular = false;
+                    setState(() {});
                     cancelToast('Email не зарегистрирован!');
                   }
                 },
@@ -292,10 +289,13 @@ class _SingInScreenState extends State<SingInScreen> {
                       color: Color(0xFF225196),
                       borderRadius: BorderRadius.circular(30)),
                   child: Center(
-                      child: circular ? CircularProgressIndicator():Text(
-                    'Войти',
-                    style: TextStyle(color: Colors.white, fontSize: 16),
-                  )),
+                    child: circular
+                        ? CircularProgressIndicator()
+                        : Text(
+                            'Войти',
+                            style: TextStyle(color: Colors.white, fontSize: 16),
+                          ),
+                  ),
                 ),
               ),
               const SizedBox(height: 15),

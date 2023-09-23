@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:petition_ha/service/api_service.dart';
 import 'package:provider/provider.dart';
-import '../../provider/selectTabProvider.dart';
 import '../../shared/app_colors.dart';
 import 'package:image_picker/image_picker.dart';
 import '../category/selectCategoty.dart';
@@ -30,6 +29,7 @@ class _HotKeshAddState extends State<HotKeshAdd> {
     print(emailGet);
     super.initState();
   }
+
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
   DateTime selectedDate1 = DateTime.now();
@@ -248,7 +248,7 @@ class _HotKeshAddState extends State<HotKeshAdd> {
           ),
           SizedBox(height: 30),
           ListTile(
-            contentPadding: EdgeInsets.only(left: 35,right: 20,bottom: 0),
+            contentPadding: EdgeInsets.only(left: 35, right: 20, bottom: 0),
             leading: Text(
               'Загрузите фото',
               style: TextStyle(
@@ -257,16 +257,14 @@ class _HotKeshAddState extends State<HotKeshAdd> {
                   fontWeight: FontWeight.w400),
             ),
             trailing: IconButton(
-              onPressed: (){
-                imageFile=[];
-                setState(() {
-
-                });
-              },
+                onPressed: () {
+                  imageFile = [];
+                  setState(() {});
+                },
                 icon: Icon(
-              Icons.delete_outline,
-              color: Colors.orange,
-            )),
+                  Icons.delete_outline,
+                  color: Colors.orange,
+                )),
           ),
           /*Padding(
             padding: const EdgeInsets.only(left: 39.0),
@@ -344,29 +342,28 @@ class _HotKeshAddState extends State<HotKeshAdd> {
                   onTap: () => Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => SelectCategory())),
                   child: Container(
-                      padding: EdgeInsets.only(left: 19,top: 13),
+                      padding: EdgeInsets.only(left: 19, top: 13),
                       width: double.infinity,
                       height: 45,
                       decoration: BoxDecoration(
                         border: Border.all(width: 1, color: AppColors.blue),
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      child:
-                          Provider.of<SelectCatProvider>(context).category == ''
-                              ? Text('Выберите категорию',
-                                  style: TextStyle(
-                                    color: Color(0xFFA6A6A6),
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w400,
-                                  ))
-                              : Text(
-                                  Provider.of<SelectCatProvider>(context)
-                                      .category,
-                                  style: TextStyle(
-                                    color: AppColors.blue,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w400,
-                                  ))),
+                      child: Provider.of<SelectCatProvider>(context).category ==
+                              ''
+                          ? Text('Выберите категорию',
+                              style: TextStyle(
+                                color: Color(0xFFA6A6A6),
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400,
+                              ))
+                          : Text(
+                              Provider.of<SelectCatProvider>(context).category,
+                              style: TextStyle(
+                                color: AppColors.blue,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400,
+                              ))),
                 ),
                 SizedBox(height: 20),
                 Padding(
@@ -462,7 +459,6 @@ class _HotKeshAddState extends State<HotKeshAdd> {
                         )),
                   ),
                 ),
-
                 SizedBox(height: 30),
                 /*Padding(
                   padding: const EdgeInsets.only(left: 19.0),
@@ -579,7 +575,8 @@ class _HotKeshAddState extends State<HotKeshAdd> {
                         var json = {
                           "description": descriptionText,
                           "price": price.text,
-                          "categoryId": Provider.of<SelectCatProvider>(context,listen: false)
+                          "categoryId": Provider.of<SelectCatProvider>(context,
+                                  listen: false)
                               .categoryId,
                           "userEmail": emailGet
                         };
@@ -595,9 +592,6 @@ class _HotKeshAddState extends State<HotKeshAdd> {
                                 gravity: ToastGravity.BOTTOM,
                                 backgroundColor: Colors.green,
                                 textColor: Colors.white);
-                            Provider.of<SelectTabProvider>(context,
-                                    listen: false)
-                                .toggleSelect(Dashboard(), 0);
                           } else {
                             Fluttertoast.showToast(
                                 msg: 'Вышла ошибка!',

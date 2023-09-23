@@ -10,7 +10,6 @@ class AppTheme {
     scaffoldBackgroundColor: AppColors.white,
     appBarTheme: AppBarTheme(
       centerTitle: true,
-      // elevation: 2,
       titleTextStyle: AppTextStyles.black18Semibold.copyWith(fontSize: 16.sp),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
@@ -23,19 +22,23 @@ class AppTheme {
           vertical: 15,
         ),
         elevation: 0,
-        // splashFactory: InteractiveInkFeature()
       ),
     ),
     inputDecorationTheme: const InputDecorationTheme(
-      filled: true,
+      filled: false,
       fillColor: AppColors.white,
       border: OutlineInputBorder(
-        borderSide: BorderSide.none,
+        borderSide: BorderSide(color: AppColors.mainColor),
         borderRadius: BorderRadius.all(Radius.circular(8)),
       ),
-      // constraints: BoxConstraints(
-      //   maxHeight: 50,
-      //   minHeight: 49,
+      enabledBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: AppColors.mainColor),
+        borderRadius: BorderRadius.all(Radius.circular(8)),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: AppColors.mainColor),
+        borderRadius: BorderRadius.all(Radius.circular(8)),
+      ),
       // ),
       contentPadding: EdgeInsets.symmetric(
         vertical: 16,
