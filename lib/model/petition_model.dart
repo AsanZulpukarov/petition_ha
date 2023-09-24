@@ -1,35 +1,64 @@
 import 'package:petition_ha/model/user_model.dart';
 
-class PetitionModel {
+class ListPetitionModel {
+  List<Data>? data;
+
+  ListPetitionModel({this.data});
+
+  ListPetitionModel.fromJson(Map<String, dynamic> json) {
+    if (json['data'] != null) {
+      data = <Data>[];
+      json['data'].forEach((v) {
+        data!.add(Data.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (this.data != null) {
+      data['data'] = this.data!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class Data {
   int? id;
-  UserModel? creator;
+  Creator? creator;
   String? ruTitle;
   String? kgTitle;
   String? ruDescription;
   String? kgDescription;
   String? photo;
-  bool? isFollow;
+  bool? isLike;
+  int? likeCount;
+  int? disLikeCount;
+  Data({
+    this.id,
+    this.creator,
+    this.ruTitle,
+    this.kgTitle,
+    this.ruDescription,
+    this.kgDescription,
+    this.photo,
+    this.isLike,
+    this.likeCount,
+    this.disLikeCount,
+  });
 
-  PetitionModel(
-      {this.id,
-      this.creator,
-      this.ruTitle,
-      this.kgTitle,
-      this.ruDescription,
-      this.kgDescription,
-      this.photo,
-      this.isFollow});
-
-  PetitionModel.fromJson(Map<String, dynamic> json) {
+  Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     creator =
-        json['creator'] != null ? UserModel.fromJson(json['creator']) : null;
+        json['creator'] != null ? Creator.fromJson(json['creator']) : null;
     ruTitle = json['ruTitle'];
     kgTitle = json['kgTitle'];
     ruDescription = json['ruDescription'];
     kgDescription = json['kgDescription'];
     photo = json['photo'];
-    isFollow = json['isFollow'];
+    isLike = json['isFollow'];
+    likeCount = json['likeCount'] ?? 1;
+    disLikeCount = json['disLikeCount'] ?? 0;
   }
 
   Map<String, dynamic> toJson() {
@@ -43,7 +72,9 @@ class PetitionModel {
     data['ruDescription'] = ruDescription;
     data['kgDescription'] = kgDescription;
     data['photo'] = photo;
-    data['isFollow'] = isFollow;
+    data['isLike'] = isLike;
+    data['likeCount'] = likeCount;
+    data['disLikeCount'] = disLikeCount;
     return data;
   }
 }

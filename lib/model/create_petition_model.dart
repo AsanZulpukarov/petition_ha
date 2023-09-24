@@ -5,10 +5,7 @@ class CreatePetitionModel {
   String? kgDescription;
 
   CreatePetitionModel(
-      {this.ruTitle,
-      this.kgTitle,
-      this.ruDescription,
-      this.kgDescription});
+      {this.ruTitle, this.kgTitle, this.ruDescription, this.kgDescription});
 
   CreatePetitionModel.fromJson(Map<String, dynamic> json) {
     ruTitle = json['ruTitle'];

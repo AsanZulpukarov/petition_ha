@@ -28,15 +28,15 @@ class AppTheme {
       filled: false,
       fillColor: AppColors.white,
       border: OutlineInputBorder(
-        borderSide: BorderSide(color: AppColors.mainColor),
+        borderSide: BorderSide.none,
         borderRadius: BorderRadius.all(Radius.circular(8)),
       ),
       enabledBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: AppColors.mainColor),
+        borderSide: BorderSide.none,
         borderRadius: BorderRadius.all(Radius.circular(8)),
       ),
       focusedBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: AppColors.mainColor),
+        borderSide: BorderSide.none,
         borderRadius: BorderRadius.all(Radius.circular(8)),
       ),
       // ),

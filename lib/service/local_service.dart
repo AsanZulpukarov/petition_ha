@@ -5,6 +5,7 @@ class LocalService {
   late SharedPreferences prefs;
   Future<void> setUserEmail(String text) async {
     prefs = await SharedPreferences.getInstance();
+    ApiService.email = text;
     await prefs.setString('emailKey', text);
   }
 

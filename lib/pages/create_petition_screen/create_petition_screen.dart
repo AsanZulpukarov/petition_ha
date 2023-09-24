@@ -61,138 +61,156 @@ class _CreatePetitionScreenState extends State<CreatePetitionScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      padding: EdgeInsets.all(20),
-      child: Column(
-        children: [
-          SizedBox(height: 10),
-          Form(
-            child: Column(
-              children: [
-                Text(
-                  'Добрый день, уважаемый Клиент!',
-                  style: AppTextStyles.black18Semibold.copyWith(
-                    fontWeight: FontWeight.w700,
-                    color: AppColors.black,
+    return Theme(
+      data: ThemeData(
+          inputDecorationTheme: InputDecorationTheme(
+        border: OutlineInputBorder(
+          borderSide: BorderSide(color: AppColors.mainColor),
+          borderRadius: BorderRadius.all(Radius.circular(8)),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: AppColors.mainColor),
+          borderRadius: BorderRadius.all(Radius.circular(8)),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: AppColors.mainColor),
+          borderRadius: BorderRadius.all(Radius.circular(8)),
+        ),
+      )),
+      child: SingleChildScrollView(
+        padding: EdgeInsets.all(20),
+        child: Column(
+          children: [
+            SizedBox(height: 10),
+            Form(
+              child: Column(
+                children: [
+                  Text(
+                    'Добрый день, уважаемый Клиент!',
+                    style: AppTextStyles.black18Semibold.copyWith(
+                      fontWeight: FontWeight.w700,
+                      color: AppColors.black,
+                    ),
                   ),
-                ),
-                _subtitleText(
-                  'Если вы хотите создать петицию тогда заполните эти данные',
-                ),
-                const SizedBox(height: 14),
-                Form(
-                  key: formKey,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      _subtitleText('Напишите название петиции *'),
-                      TextFormField(
-                        controller: _titleController,
-                        decoration: const InputDecoration(
-                          hintText: 'Название',
+                  _subtitleText(
+                    'Если вы хотите создать петицию тогда заполните эти данные',
+                  ),
+                  const SizedBox(height: 14),
+                  Form(
+                    key: formKey,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _subtitleText('Напишите название петиции *'),
+                        TextFormField(
+                          controller: _titleController,
+                          decoration: const InputDecoration(
+                            hintText: 'Название',
+                          ),
                         ),
-                      ),
-                      const SizedBox(height: 10),
-                      _subtitleText('Напишите описание петиции*'),
-                      TextFormField(
-                        controller: _descriptionController,
-                        decoration: const InputDecoration(
-                          hintText: 'Описание',
+                        const SizedBox(height: 10),
+                        _subtitleText('Напишите описание петиции*'),
+                        TextFormField(
+                          controller: _descriptionController,
+                          decoration: const InputDecoration(
+                            hintText: 'Описание',
+                          ),
+                          maxLines: 12,
                         ),
-                        maxLines: 12,
-                      ),
-                      const SizedBox(height: 14),
-                      Text('Загрузите фото',
-                          style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.w400)),
-                      const SizedBox(height: 7),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            if (imageFile.isNotEmpty)
-                              Container(
-                                height: 80,
-                                child: ListView.separated(
-                                  scrollDirection: Axis.horizontal,
-                                  separatorBuilder: (context, _) =>
-                                      const SizedBox(width: 5),
-                                  itemCount: imageFile.length,
-                                  itemBuilder: (context, index) => Container(
-                                    width: 80,
-                                    height: 80,
-                                    decoration: BoxDecoration(
-                                        border: Border.all(
-                                          width: 1,
-                                          color: AppColors.mainColor,
-                                        ),
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.circular(10),
-                                        image: DecorationImage(
-                                          fit: BoxFit.cover,
-                                          image: FileImage(
-                                              File(imageFile[index].path)),
-                                        )),
+                        const SizedBox(height: 14),
+                        Text('Загрузите фото',
+                            style: TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.w400)),
+                        const SizedBox(height: 7),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              if (imageFile.isNotEmpty)
+                                Container(
+                                  height: 80,
+                                  child: ListView.separated(
+                                    scrollDirection: Axis.horizontal,
+                                    separatorBuilder: (context, _) =>
+                                        const SizedBox(width: 5),
+                                    itemCount: imageFile.length,
+                                    itemBuilder: (context, index) => Container(
+                                      width: 80,
+                                      height: 80,
+                                      decoration: BoxDecoration(
+                                          border: Border.all(
+                                            width: 1,
+                                            color: AppColors.mainColor,
+                                          ),
+                                          color: Colors.white,
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          image: DecorationImage(
+                                            fit: BoxFit.cover,
+                                            image: FileImage(
+                                                File(imageFile[index].path)),
+                                          )),
+                                    ),
                                   ),
                                 ),
+                              const SizedBox(
+                                height: 20,
                               ),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                showModalBottomSheet(
-                                  context: context,
-                                  builder: ((builder) => bottomSheet()),
+                              GestureDetector(
+                                onTap: () {
+                                  showModalBottomSheet(
+                                    context: context,
+                                    builder: ((builder) => bottomSheet()),
+                                  );
+                                },
+                                child: Container(
+                                  width: 80,
+                                  height: 80,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                      width: 1,
+                                      color: AppColors.mainColor,
+                                    ),
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: const Icon(Icons.add,
+                                      color: AppColors.mainColor, size: 25),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                        SizedBox(
+                          width: double.infinity,
+                          child: ElevatedButton(
+                            onPressed: () async {
+                              if (formKey.currentState!.validate()) {
+                                CreatePetitionModel petition =
+                                    CreatePetitionModel(
+                                  ruTitle: _titleController.text,
+                                  kgTitle: _titleController.text,
+                                  ruDescription: _descriptionController.text,
+                                  kgDescription: _descriptionController.text,
                                 );
-                              },
-                              child: Container(
-                                width: 80,
-                                height: 80,
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    width: 1,
-                                    color: AppColors.mainColor,
-                                  ),
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: const Icon(Icons.add,
-                                    color: AppColors.mainColor, size: 25),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(height: 20),
-                      SizedBox(
-                        width: double.infinity,
-                        child: ElevatedButton(
-                          onPressed: () async {
-                            if (formKey.currentState!.validate()) {
-                              CreatePetitionModel petition =
-                                  CreatePetitionModel(
-                                ruTitle: _titleController.text,
-                                kgTitle: _titleController.text,
-                                ruDescription: _descriptionController.text,
-                                kgDescription: _descriptionController.text,
-                              );
 
-                              showToast(await ApiService()
-                                  .createPetition(imageFile, petition));
-                            }
-                          },
-                          child: const Text('Отправить'),
+                                showToast(await ApiService()
+                                    .createPetition(imageFile, petition));
+                              }
+                            },
+                            child: const Text('Отправить'),
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

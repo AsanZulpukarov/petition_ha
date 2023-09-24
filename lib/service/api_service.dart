@@ -4,13 +4,14 @@ import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:petition_ha/model/create_petition_model.dart';
+import 'package:petition_ha/model/petition_model.dart';
 
 class ApiService {
   var client = http.Client();
-  static var ip = '192.168.0.192';
+  static var ip = '192.168.43.93';
   static var port = 8080;
 
-  static String email = " ";
+  static String email = "";
 
   Future<dynamic> getProducts() async {
     var uri = Uri(
@@ -198,6 +199,136 @@ class ApiService {
       print(response.body);
       return false;
       //throw exception and catch it in UI
+    }
+  }
+
+  Future<dynamic> getListPetition() async {
+    var uri = Uri(
+      scheme: 'http',
+      host: ip,
+      port: port,
+      path: 'petition/$email',
+    );
+    print(uri);
+    var response = await client.get(uri, headers: {
+      "Content-Type": "application/json",
+      "Accept": "*/*",
+    });
+    print(response.statusCode);
+    if (response.statusCode == 201 || response.statusCode == 200) {
+      final responseBody = utf8.decode(response.bodyBytes);
+      return responseBody;
+    } else {
+      print(response.statusCode);
+    }
+  }
+
+  Future<dynamic> getListComment(int idPetition) async {
+    var uri = Uri(
+      scheme: 'http',
+      host: ip,
+      port: port,
+      path: 'petition/comments/$email/$idPetition',
+    );
+    print(uri);
+    var response = await client.get(
+      uri,
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "*/*",
+      },
+    );
+    print(response.statusCode);
+    if (response.statusCode == 201 || response.statusCode == 200) {
+      final responseBody = utf8.decode(response.bodyBytes);
+      print(response.statusCode);
+      return responseBody;
+    } else {
+      print(response.statusCode);
+    }
+  }
+
+  Future<dynamic> getListCategory() async {
+    var uri = Uri(
+      scheme: 'http',
+      host: ip,
+      port: port,
+      path: 'law/categories',
+    );
+    print(uri);
+    var response = await client.get(uri, headers: {
+      "Content-Type": "application/json",
+      "Accept": "*/*",
+    });
+    print(response.statusCode);
+    if (response.statusCode == 201 || response.statusCode == 200) {
+      final responseBody = utf8.decode(response.bodyBytes);
+      return responseBody;
+    } else {
+      print(response.statusCode);
+    }
+  }
+
+  Future<dynamic> getListSection(int idCategory) async {
+    var uri = Uri(
+      scheme: 'http',
+      host: ip,
+      port: port,
+      path: 'law/sections/$idCategory',
+    );
+    print(uri);
+    var response = await client.get(uri, headers: {
+      "Content-Type": "application/json",
+      "Accept": "*/*",
+    });
+    print(response.statusCode);
+    if (response.statusCode == 201 || response.statusCode == 200) {
+      final responseBody = utf8.decode(response.bodyBytes);
+      return responseBody;
+    } else {
+      print(response.statusCode);
+    }
+  }
+
+  Future<dynamic> getListChapter(int idChapter) async {
+    var uri = Uri(
+      scheme: 'http',
+      host: ip,
+      port: port,
+      path: 'law/chapters/$idChapter',
+    );
+    print(uri);
+    var response = await client.get(uri, headers: {
+      "Content-Type": "application/json",
+      "Accept": "*/*",
+    });
+    print(response.statusCode);
+    if (response.statusCode == 201 || response.statusCode == 200) {
+      final responseBody = utf8.decode(response.bodyBytes);
+      return responseBody;
+    } else {
+      print(response.statusCode);
+    }
+  }
+
+  Future<dynamic> getListLaws(int idChapter) async {
+    var uri = Uri(
+      scheme: 'http',
+      host: ip,
+      port: port,
+      path: 'law/laws/$idChapter',
+    );
+    print(uri);
+    var response = await client.get(uri, headers: {
+      "Content-Type": "application/json",
+      "Accept": "*/*",
+    });
+    print(response.statusCode);
+    if (response.statusCode == 201 || response.statusCode == 200) {
+      final responseBody = utf8.decode(response.bodyBytes);
+      return responseBody;
+    } else {
+      print(response.statusCode);
     }
   }
 
