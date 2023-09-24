@@ -30,6 +30,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  args: ^2.0.0
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -46,6 +47,12 @@ dependencies:
   photo_view: ^0.13.0
   carousel_slider: ^4.0.0
   table_calendar: ^3.0.2
+  swipe: ^0.0.1
+  flutter_tts: ^3.8.3
+
+  speech_to_text: ^6.3.0
+  highlight_text: ^1.7.0
+  avatar_glow: ^2.0.2
 
 dev_dependencies:
   flutter_test:
