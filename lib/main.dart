@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:petition_ha/shared/app_theme.dart';
 import 'package:petition_ha/view/splash_screen.dart';
 
+import 'amansCreate/second_splash_screen.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -12,6 +14,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final mediaQueryData = MediaQuery.of(context);
+    Widget nextWidget;
+    if (mediaQueryData.accessibleNavigation)
+      nextWidget = SecondSplashPage();
+    else
+      nextWidget = SplashPage();
     return ScreenUtilInit(
       designSize: const Size(360, 690),
       minTextAdapt: true,
@@ -25,7 +33,7 @@ class MyApp extends StatelessWidget {
           home: child,
         );
       },
-      child: const SplashPage(),
+      child: SecondSplashPage(),
     );
   }
 }

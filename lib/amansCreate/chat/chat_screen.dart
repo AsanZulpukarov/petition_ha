@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:petition_ha/amansCreate/service_aman.dart';
 import 'package:petition_ha/widgets/appBar.dart';
 
 import '../../service/api_service.dart';
@@ -25,7 +26,7 @@ class _ChatScreenState extends State<ChatScreen> {
       _textController.clear();
     });
 
-    var response = await ApiService().postSendQuestion(text);
+    var response = await ServiceAman().postSendQuestion(text);
     var data = json.decode(response.body);
     String botResponse = data['response'];
 

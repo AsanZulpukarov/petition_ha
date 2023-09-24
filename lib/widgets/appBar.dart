@@ -8,6 +8,7 @@ class AllAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      centerTitle: true,
       title: Container(
         width: 60,
         height: 60,
