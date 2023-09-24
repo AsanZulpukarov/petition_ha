@@ -10,12 +10,13 @@ class ApiService {
   var client = http.Client();
   static var ip = '192.168.43.93';
   static var port = 8080;
+  static var scheme = 'http';
 
   static String email = "";
 
   Future<dynamic> getProducts() async {
     var uri = Uri(
-      scheme: 'http',
+      scheme: scheme,
       host: ip,
       port: port,
       path: 'Products/Index',
@@ -35,7 +36,7 @@ class ApiService {
 
   Future<dynamic> getCategoryProducts(String id) async {
     var uri = Uri(
-        scheme: 'http',
+        scheme: scheme,
         host: ip,
         port: port,
         path: 'Products/Index',
@@ -55,7 +56,7 @@ class ApiService {
 
   Future<dynamic> getSearchProducts(String search) async {
     var uri = Uri(
-        scheme: 'http',
+        scheme: scheme,
         host: ip,
         port: port,
         path: 'Products/Search',
@@ -75,7 +76,7 @@ class ApiService {
 
   Future<dynamic> getCategories() async {
     var uri = Uri(
-      scheme: 'http',
+      scheme: scheme,
       host: ip,
       port: port,
       path: 'Categories/Index',
@@ -95,7 +96,7 @@ class ApiService {
 
   Future<dynamic> getProductsFavorite(String email) async {
     var uri = Uri(
-        scheme: 'http',
+        scheme: scheme,
         host: ip,
         port: port,
         path: 'Favorites/GetFavorites',
@@ -115,7 +116,7 @@ class ApiService {
 
   Future<dynamic> getProductData(String productId, String email) async {
     var uri = Uri(
-        scheme: 'http',
+        scheme: scheme,
         host: ip,
         port: port,
         path: 'Products/GetById',
@@ -135,7 +136,7 @@ class ApiService {
 
   Future<String> getSetFavorite(String productId, String email) async {
     var uri = Uri(
-        scheme: 'http',
+        scheme: scheme,
         host: ip,
         port: port,
         path: 'Favorites/SetFavorite',
@@ -156,7 +157,7 @@ class ApiService {
 
   Future<String> getUnSetFavorite(String productId, String email) async {
     var uri = Uri(
-        scheme: 'http',
+        scheme: scheme,
         host: ip,
         port: port,
         path: 'Favorites/UnsetFavorite',
@@ -179,7 +180,7 @@ class ApiService {
     Map<String, String> json = {"email": email, "password": password};
 
     var uri = Uri(
-      scheme: 'http',
+      scheme: scheme,
       host: ip,
       port: port,
       path: 'user/register',
@@ -204,7 +205,7 @@ class ApiService {
 
   Future<dynamic> getListPetition() async {
     var uri = Uri(
-      scheme: 'http',
+      scheme: scheme,
       host: ip,
       port: port,
       path: 'petition/$email',
@@ -225,7 +226,7 @@ class ApiService {
 
   Future<dynamic> getListComment(int idPetition) async {
     var uri = Uri(
-      scheme: 'http',
+      scheme: scheme,
       host: ip,
       port: port,
       path: 'petition/comments/$email/$idPetition',
@@ -250,7 +251,7 @@ class ApiService {
 
   Future<dynamic> getListCategory() async {
     var uri = Uri(
-      scheme: 'http',
+      scheme: scheme,
       host: ip,
       port: port,
       path: 'law/categories',
@@ -271,7 +272,7 @@ class ApiService {
 
   Future<dynamic> getListSection(int idCategory) async {
     var uri = Uri(
-      scheme: 'http',
+      scheme: scheme,
       host: ip,
       port: port,
       path: 'law/sections/$idCategory',
@@ -292,7 +293,7 @@ class ApiService {
 
   Future<dynamic> getListChapter(int idChapter) async {
     var uri = Uri(
-      scheme: 'http',
+      scheme: scheme,
       host: ip,
       port: port,
       path: 'law/chapters/$idChapter',
@@ -313,7 +314,7 @@ class ApiService {
 
   Future<dynamic> getListLaws(int idChapter) async {
     var uri = Uri(
-      scheme: 'http',
+      scheme: scheme,
       host: ip,
       port: port,
       path: 'law/laws/$idChapter',
@@ -335,7 +336,7 @@ class ApiService {
   Future<String> createPetition(
       List<XFile> file, CreatePetitionModel createPetitionModel) async {
     var uri = Uri(
-      scheme: 'http',
+      scheme: scheme,
       host: '192.168.0.192',
       port: 8080,
       path: 'petition/create',
@@ -376,7 +377,7 @@ class ApiService {
     Map<String, String> json = {"email": email, "password": password};
 
     var uri = Uri(
-      scheme: 'http',
+      scheme: scheme,
       host: ip,
       port: port,
       path: 'user/signIn',
@@ -406,7 +407,7 @@ class ApiService {
     //var _payload = json.encode(object);
 
     var uri = Uri(
-      scheme: 'http',
+      scheme: scheme,
       host: ip,
       port: port,
       path: 'User/UpdateProfile',
@@ -431,7 +432,7 @@ class ApiService {
 
     var url = Uri.parse('http://$ip/Products/Index?email=$email');
     var uri = Uri(
-        scheme: 'http',
+        scheme: scheme,
         host: ip,
         port: port,
         path: 'Products/Index',
@@ -452,7 +453,7 @@ class ApiService {
 
   Future<dynamic> getUserData(String email) async {
     var uri = Uri(
-        scheme: 'http',
+        scheme: scheme,
         host: ip,
         port: port,
         path: '/User/GetProfile',
@@ -480,7 +481,7 @@ class ApiService {
     var url = Uri.parse(
         'http://$ip/User/SendCodeWordToEmailToConfirmEmail?email=$email');
     var uri = Uri(
-      scheme: 'http',
+      scheme: scheme,
       host: ip,
       port: port,
       path: "User/SendCodeWordToEmailToConfirmEmail?email=$email",
@@ -504,7 +505,7 @@ class ApiService {
     Map<String, String> json = {"secretWord": kod, "email": email};
 
     var uri = Uri(
-      scheme: 'http',
+      scheme: scheme,
       host: ip,
       port: port,
       path: 'User/ConfirmEmail',
@@ -528,7 +529,7 @@ class ApiService {
     //var _payload = json.encode(object);
 
     var uri = Uri(
-      scheme: 'http',
+      scheme: scheme,
       host: ip,
       port: port,
       path: 'Products/AddWithEmail',
@@ -550,7 +551,7 @@ class ApiService {
 
   Future<bool> postProductPhotoAdd(List<XFile> file, int id) async {
     var uri = Uri(
-      scheme: 'http',
+      scheme: scheme,
       host: ip,
       port: port,
       path: 'ProductImage/AddImage/$id',
@@ -590,7 +591,7 @@ class ApiService {
   Future<bool> postProfilePhotoAdd(XFile file, String email,
       [bool update = false]) async {
     var uri = Uri(
-        scheme: 'http',
+        scheme: scheme,
         host: ip,
         port: port,
         path: 'User/ProfileAvatar',

@@ -5,7 +5,10 @@ import 'package:flutter/material.dart';
 
 import 'package:face_camera/face_camera.dart';
 import 'package:http/http.dart' as http;
+import 'package:petition_ha/service/api_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../pages/profile/profile.dart';
 
 class FaceVerification extends StatefulWidget {
   final String passport;
@@ -38,12 +41,13 @@ class _MyAppState extends State<FaceVerification> {
                     ),
                     ElevatedButton(
                         onPressed: () async {
-                          var face = base64Encode(_capturedImage!.readAsBytesSync());
+                          var face =
+                              base64Encode(_capturedImage!.readAsBytesSync());
                           var url = Uri(
-                            port: 80,
+                            port: ApiService.port,
                             path: 'user/set-identification',
-                            host: '192.168.0.122',
-                            scheme: 'http',
+                            host: ApiService.ip,
+                            scheme: ApiService.scheme,
                           );
                           var shared = await SharedPreferences.getInstance();
                           Map data = {
@@ -51,15 +55,23 @@ class _MyAppState extends State<FaceVerification> {
                             'face': face,
                             'email': shared.get('email').toString(),
                           };
+
+                          var body = json.encode(data);
+                          await http.post(url,
+                              headers: {"Content-Type": "application/json"},
+                              body: body);
                           print('length');
                           print(widget.passport.length);
                           print(face.length);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Profile(),
+                            ),
+                          );
 
                           return;
                           //encode Map to JSON
-                          var body = json.encode(data);
-                          http.post(url, headers: {"Content-Type": "application/json"},
-                              body: body);
                         },
                         // => setState(() => _capturedImage = null),
                         child: const Text(
@@ -95,10 +107,10 @@ class _MyAppState extends State<FaceVerification> {
   }
 
   Widget _message(String msg) => Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 55, vertical: 15),
-    child: Text(msg,
-        textAlign: TextAlign.center,
-        style: const TextStyle(
-            fontSize: 14, height: 1.5, fontWeight: FontWeight.w400)),
-  );
+        padding: const EdgeInsets.symmetric(horizontal: 55, vertical: 15),
+        child: Text(msg,
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+                fontSize: 14, height: 1.5, fontWeight: FontWeight.w400)),
+      );
 }

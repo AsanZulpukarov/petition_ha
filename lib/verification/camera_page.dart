@@ -105,7 +105,10 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
       onTap: () {
         _cameraManager.isReadyToGo = true;
       },
-      child: Image.asset('images/icon-capture.png', width: 80, height: 80),
+      child: Icon(
+        Icons.camera,
+        size: 80,
+      ),
     );
 
     return WillPopScope(
