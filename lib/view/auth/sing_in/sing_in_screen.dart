@@ -19,7 +19,8 @@ class SingInScreen extends StatefulWidget {
 class _SingInScreenState extends State<SingInScreen> {
   TextEditingController email = TextEditingController(text: "user@a.kg");
   TextEditingController password = TextEditingController(text: "123");
-  TextEditingController ip = TextEditingController(text: '192.168.0.192');
+  TextEditingController ip =
+      TextEditingController(text: 'mmabackend.duckdns.org');
   bool showPassword = false;
   bool circular = false;
 
@@ -247,10 +248,10 @@ class _SingInScreenState extends State<SingInScreen> {
                 height: 15,
               ),
               passwordField(),
-              SizedBox(
+              /* SizedBox(
                 height: 20,
               ),
-              ipField(),
+              ipField(),*/
               SizedBox(
                 height: 20,
               ),

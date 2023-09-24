@@ -8,6 +8,7 @@ import '../service/api_service.dart';
 class ServiceAman {
   var client = http.Client();
   static var ip = '192.168.0.192';
+  var sheme = 'https';
   Future<dynamic> getPetitions() async {
     var uri = Uri(
       scheme: ApiService.scheme,
@@ -32,9 +33,9 @@ class ServiceAman {
     //var _payload = json.encode(object);
 
     var uri = Uri(
-      scheme: 'http',
-      host: ip,
-      port: 8080,
+      scheme: ApiService.scheme,
+      host: ApiService.ip,
+      port: ApiService.port,
       path: 'petition/like',
     );
     var request = http.MultipartRequest('POST', uri);
@@ -60,9 +61,9 @@ class ServiceAman {
     //var _payload = json.encode(object);
 
     var uri = Uri(
-      scheme: 'http',
-      host: ip,
-      port: 8080,
+      scheme: ApiService.scheme,
+      host: ApiService.ip,
+      port: ApiService.port,
       path: 'user/set-identification',
     );
     var request = http.MultipartRequest('POST', uri);
@@ -87,9 +88,9 @@ class ServiceAman {
     //var _payload = json.encode(object);
 
     var uri = Uri(
-      scheme: 'http',
-      host: ip,
-      port: 8080,
+      scheme: ApiService.scheme,
+      host: ApiService.ip,
+      port: ApiService.port,
       path: 'petition/comment',
     );
     var request = http.MultipartRequest('POST', uri);
@@ -116,9 +117,9 @@ class ServiceAman {
     };
 
     var uri = Uri(
-      scheme: 'http',
-      host: '192.168.43.93',
-      port: 8080,
+      scheme: ApiService.scheme,
+      host: ApiService.ip,
+      port: ApiService.port,
       path: 'api/openAi',
     );
     var response = await client
