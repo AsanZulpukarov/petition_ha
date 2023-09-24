@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 
 import 'package:face_camera/face_camera.dart';
 import 'package:http/http.dart' as http;
+import 'package:petition_ha/amansCreate/service_aman.dart';
+import 'package:petition_ha/home/home_screen.dart';
 import 'package:petition_ha/service/api_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -43,32 +45,36 @@ class _MyAppState extends State<FaceVerification> {
                         onPressed: () async {
                           var face =
                               base64Encode(_capturedImage!.readAsBytesSync());
-                          var url = Uri(
+                          /*var url = Uri(
                             port: ApiService.port,
                             path: 'user/set-identification',
                             host: ApiService.ip,
                             scheme: ApiService.scheme,
-                          );
+                          );*/
                           var shared = await SharedPreferences.getInstance();
-                          Map data = {
+                          /* Map data = {
                             'passport': widget.passport,
-                            'face': face,
+                            'face': '3425746758574',
                             'email': shared.get('email').toString(),
-                          };
-
-                          var body = json.encode(data);
+                          };*/
+                          var email = shared.get('emailKey').toString();
+                          print(email);
+                          print(widget.passport);
+                          bool ans = await ServiceAman()
+                              .postVerification(email, face, widget.passport);
+                          /*var body = json.encode(data);
                           await http.post(url,
                               headers: {"Content-Type": "application/json"},
-                              body: body);
+                              body: body);*/
+                          if (ans)
+                            print('ok');
+                          else
+                            print('no');
                           print('length');
                           print(widget.passport.length);
                           print(face.length);
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => Profile(),
-                            ),
-                          );
+                          Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(builder: (_) => Home()));
 
                           return;
                           //encode Map to JSON

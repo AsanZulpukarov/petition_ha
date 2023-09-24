@@ -10,6 +10,7 @@ import 'package:petition_ha/shared/app_text_styles.dart';
 import 'package:petition_ha/verification/face_verification.dart';
 
 import '../../verification/camera_page.dart';
+import '../../verification/passport_and_face.dart';
 import '../../verification/utils.dart';
 import '../../view/auth/sing_in/sing_in_screen.dart';
 import '../../widgets/prifle_item.dart';
@@ -95,14 +96,8 @@ class Profile extends StatelessWidget {
                 ),
                 label: 'Пройти верификацию',
                 onTap: () {
-                  if (!kIsWeb && Platform.isLinux) {
-                    showAlert(context, "Warning",
-                        "${Platform.operatingSystem} is not supported");
-                    return;
-                  }
-
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return const CameraPage();
+                    return PassportAndFace();
                   }));
                   // Navigator.push(context, MaterialPageRoute(builder: ()));
                 },

@@ -8,7 +8,7 @@ import 'package:petition_ha/model/petition_model.dart';
 
 class ApiService {
   var client = http.Client();
-  static var ip = '192.168.43.93';
+  static var ip = '192.168.0.192';
   static var port = 8080;
   static var scheme = 'http';
 
