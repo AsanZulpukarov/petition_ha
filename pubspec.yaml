@@ -47,6 +47,14 @@ dependencies:
   carousel_slider: ^4.0.0
   table_calendar: ^3.0.2
 
+  flutter_document_scan_sdk: ^1.0.2
+  face_camera: ^0.0.8
+  camera_windows:
+    git:
+      url: https://github.com/yushulx/flutter_camera_windows.git
+  share_plus: ^7.0.2
+  url_launcher: ^6.1.11
+  flutter_exif_rotation: ^0.5.1
 
 dev_dependencies:
   flutter_test:
