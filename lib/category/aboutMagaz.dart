@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:petition_ha/service/api_service.dart';
 
-
 import '../../fetches/about_product_fetch.dart';
 import '../../model/aboutProductModel.dart';
 import '../../shared/app_colors.dart';
@@ -17,14 +16,19 @@ class AboutMagaz extends StatefulWidget {
   final String email;
   final bool checkUserPage;
 
-  const AboutMagaz({Key? key,required this.productId,required this.email,required this.checkUserPage}) : super(key: key);
+  const AboutMagaz(
+      {Key? key,
+      required this.productId,
+      required this.email,
+      required this.checkUserPage})
+      : super(key: key);
 
   @override
   _AboutMagazState createState() => _AboutMagazState();
 }
 
 class _AboutMagazState extends State<AboutMagaz> {
-  bool isFavorite=false;
+  bool isFavorite = false;
   String comment =
       '''Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua tempor incididunt ut labore et dolore ''';
   List<String> userComment = [
@@ -39,7 +43,7 @@ class _AboutMagazState extends State<AboutMagaz> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    futureProductData=fetchProductData(widget.productId,widget.email);
+    futureProductData = fetchProductData(widget.productId, widget.email);
   }
 
   @override
@@ -50,33 +54,34 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
     return Scaffold(
       appBar: AllAppBar2(),
       body: FutureBuilder<AboutProductModel>(
-        future: fetchProductData(widget.productId,widget.email),
+        future: fetchProductData(widget.productId, widget.email),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-
-            List<String> nameAndDescription=[snapshot.data!.description!.split('name').first,snapshot.data!.description!.split('name').last];
-            var path=snapshot.data!;
-            isFavorite=path.isFavorite!;
-            return
-              ListView(
-                padding: EdgeInsets.symmetric(horizontal: 14),
-                children: [
-                  Row(
-                    children: [
-                      Container(
-                        width: 122,
-                        height: 122,
-                        padding: EdgeInsets.all(9),
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Colors.white,
-                            boxShadow: [
-                              BoxShadow(
-                                  blurRadius: 5,
-                                  offset: Offset(0, 0),
-                                  color: Color(0x26000000))
-                            ]),
-                        child: Container(
+            List<String> nameAndDescription = [
+              snapshot.data!.description!.split('name').first,
+              snapshot.data!.description!.split('name').last
+            ];
+            var path = snapshot.data!;
+            isFavorite = path.isFavorite!;
+            return ListView(
+              padding: EdgeInsets.symmetric(horizontal: 14),
+              children: [
+                Row(
+                  children: [
+                    Container(
+                      width: 122,
+                      height: 122,
+                      padding: EdgeInsets.all(9),
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                                blurRadius: 5,
+                                offset: Offset(0, 0),
+                                color: Color(0x26000000))
+                          ]),
+                      child: Container(
                           padding: EdgeInsets.all(9),
                           decoration: BoxDecoration(
                               shape: BoxShape.circle,
@@ -88,133 +93,141 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
                                     color: Color(0x26000000))
                               ]),
                           child: CircleAvatar(
-
                               radius: 53,
-                              backgroundImage: NetworkImage('http://${ApiService.ip}/${path.images![0]}')
-                          )
-                        ),
-                      ),
-                      SizedBox(width: 15),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            width: 150,
-                            child: Text(
-                              nameAndDescription[0],
-                              style: TextStyle(
-                                color: Color(0xFF313131),
-                                fontSize: 20,
-                                overflow: TextOverflow.clip,
-                                fontWeight: FontWeight.w400,
-                              ),
+                              backgroundImage: NetworkImage(
+                                  'https://${ApiService.ip}/${path.images![0]}'))),
+                    ),
+                    SizedBox(width: 15),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          width: 150,
+                          child: Text(
+                            nameAndDescription[0],
+                            style: TextStyle(
+                              color: Color(0xFF313131),
+                              fontSize: 20,
+                              overflow: TextOverflow.clip,
+                              fontWeight: FontWeight.w400,
                             ),
                           ),
-                          SizedBox(height: 17),
-                          Row(
-                            children: [
-                              Container(
-                                padding: EdgeInsets.all(5),
-                                width: 26,
-                                height: 26,
-                                decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(10),
-                                    boxShadow: [
-                                      BoxShadow(
-                                          color: Color(0x26000000),
-                                          offset: Offset(0, 1),
-                                          blurRadius: 4)
-                                    ]),
-                                child: Center(
-                                  child: Icon(Icons.email_outlined,color: Colors.green,size: 16,),
+                        ),
+                        SizedBox(height: 17),
+                        Row(
+                          children: [
+                            Container(
+                              padding: EdgeInsets.all(5),
+                              width: 26,
+                              height: 26,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(10),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Color(0x26000000),
+                                        offset: Offset(0, 1),
+                                        blurRadius: 4)
+                                  ]),
+                              child: Center(
+                                child: Icon(
+                                  Icons.email_outlined,
+                                  color: Colors.green,
+                                  size: 16,
                                 ),
                               ),
-                              SizedBox(width: 12),
-                              Container(
-                                width: 150,
-                                child: Text(
-                                  path.sellerEmail ?? '',
-                                  overflow: TextOverflow.clip,
-                                  style: TextStyle(
-                                      color: Color(0xFF535353),
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w400),
-                                ),
-                              )
-                            ],
-                          ),
-                          SizedBox(height: 5),
-                          Row(
-                            children: [
-                              Container(
-                                padding: EdgeInsets.all(5),
-                                width: 26,
-                                height: 26,
-                                decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(10),
-                                    boxShadow: [
-                                      BoxShadow(
-                                          color: Color(0x26000000),
-                                          offset: Offset(0, 1),
-                                          blurRadius: 4)
-                                    ]),
-                                child: Center(
-                                  child: Icon(Icons.monetization_on_outlined,color: Colors.red,size: 16,),
-                                ),
-                              ),
-                              SizedBox(width: 12),
-                              Text(
-                                path?.price==null ? 'Договорная цена': '${path.price!.round().toString()} сом',
+                            ),
+                            SizedBox(width: 12),
+                            Container(
+                              width: 150,
+                              child: Text(
+                                path.sellerEmail ?? '',
+                                overflow: TextOverflow.clip,
                                 style: TextStyle(
                                     color: Color(0xFF535353),
                                     fontSize: 12,
                                     fontWeight: FontWeight.w400),
-                              )
-                            ],
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 48),
-                  Text(
-                    'Описание',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w400,
+                              ),
+                            )
+                          ],
+                        ),
+                        SizedBox(height: 5),
+                        Row(
+                          children: [
+                            Container(
+                              padding: EdgeInsets.all(5),
+                              width: 26,
+                              height: 26,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(10),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Color(0x26000000),
+                                        offset: Offset(0, 1),
+                                        blurRadius: 4)
+                                  ]),
+                              child: Center(
+                                child: Icon(
+                                  Icons.monetization_on_outlined,
+                                  color: Colors.red,
+                                  size: 16,
+                                ),
+                              ),
+                            ),
+                            SizedBox(width: 12),
+                            Text(
+                              path?.price == null
+                                  ? 'Договорная цена'
+                                  : '${path.price!.round().toString()} сом',
+                              style: TextStyle(
+                                  color: Color(0xFF535353),
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w400),
+                            )
+                          ],
+                        ),
+                      ],
                     ),
+                  ],
+                ),
+                SizedBox(height: 48),
+                Text(
+                  'Описание',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w400,
                   ),
-                  SizedBox(height: 10),
-                  Text(
-                    nameAndDescription[1],
-                    style: TextStyle(
-                      color: Color(0xFF515151),
-                      fontSize: 14,
-                    ),
+                ),
+                SizedBox(height: 10),
+                Text(
+                  nameAndDescription[1],
+                  style: TextStyle(
+                    color: Color(0xFF515151),
+                    fontSize: 14,
                   ),
-                  SizedBox(height: 30),
-                  if(!(widget.email== path.sellerEmail))
+                ),
+                SizedBox(height: 30),
+                if (!(widget.email == path.sellerEmail))
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 60.0),
                     child: InkWell(
-                      onTap: () async{
-                         String ans="null";
-                         String ans2="null";
+                      onTap: () async {
+                        String ans = "null";
+                        String ans2 = "null";
 
-                        if(!isFavorite) {
+                        if (!isFavorite) {
                           print('set');
-                        ans = await ApiService()
-                            .getSetFavorite(widget.productId, widget.email);
-                      } else {
+                          ans = await ApiService()
+                              .getSetFavorite(widget.productId, widget.email);
+                        } else {
                           print('unset');
-                        ans2 = await ApiService()
-                            .getUnSetFavorite(widget.productId, widget.email);
-                      }
-                        print(ans+' '+ans2);
-                      if(ans=='true') {
+                          ans2 = await ApiService()
+                              .getUnSetFavorite(widget.productId, widget.email);
+                        }
+                        print(ans + ' ' + ans2);
+                        if (ans == 'true') {
                           Fluttertoast.showToast(
                               msg: 'Добавлено',
                               fontSize: 18,
@@ -223,10 +236,9 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
                               textColor: Colors.white);
 
                           setState(() {
-                            isFavorite=true;
+                            isFavorite = true;
                           });
-                        }
-                        else if(ans=='false'){
+                        } else if (ans == 'false') {
                           Fluttertoast.showToast(
                               msg: 'Вышла ошибка!',
                               fontSize: 18,
@@ -235,26 +247,25 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
                               textColor: Colors.white);
                         }
 
-                         if(ans2=='true') {
-                           Fluttertoast.showToast(
-                               msg: 'Убрано',
-                               fontSize: 18,
-                               gravity: ToastGravity.BOTTOM,
-                               backgroundColor: Colors.green,
-                               textColor: Colors.white);
+                        if (ans2 == 'true') {
+                          Fluttertoast.showToast(
+                              msg: 'Убрано',
+                              fontSize: 18,
+                              gravity: ToastGravity.BOTTOM,
+                              backgroundColor: Colors.green,
+                              textColor: Colors.white);
 
-                           setState(() {
-                             isFavorite=false;
-                           });
-                         }
-                         else if(ans2=='false'){
-                           Fluttertoast.showToast(
-                               msg: 'Вышла ошибка!',
-                               fontSize: 18,
-                               gravity: ToastGravity.BOTTOM,
-                               backgroundColor: Colors.red,
-                               textColor: Colors.white);
-                         }
+                          setState(() {
+                            isFavorite = false;
+                          });
+                        } else if (ans2 == 'false') {
+                          Fluttertoast.showToast(
+                              msg: 'Вышла ошибка!',
+                              fontSize: 18,
+                              gravity: ToastGravity.BOTTOM,
+                              backgroundColor: Colors.red,
+                              textColor: Colors.white);
+                        }
                       },
                       child: Ink(
                           height: 45,
@@ -265,100 +276,110 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
                           child: Row(
                             children: [
                               Expanded(
-                                flex: 1,
-                                child: isFavorite ? Icon(Icons.favorite,color: Colors.white):Icon(Icons.favorite_border_outlined,color: Colors.white,)
-                              ),
+                                  flex: 1,
+                                  child: isFavorite
+                                      ? Icon(Icons.favorite,
+                                          color: Colors.white)
+                                      : Icon(
+                                          Icons.favorite_border_outlined,
+                                          color: Colors.white,
+                                        )),
                               Expanded(
                                 flex: 3,
                                 child: Text(
-                                   isFavorite ? 'Убрать из избранного' : 'Добавить в избранное',
-                                  style: TextStyle(color: Colors.white, fontSize: 15),
+                                  isFavorite
+                                      ? 'Убрать из избранного'
+                                      : 'Добавить в избранное',
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 15),
                                 ),
                               ),
                             ],
                           )),
                     ),
                   ),
-                  SizedBox(height: 60),
-                  Text(
-                    'Галерея',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 20,
-                    ),
+                SizedBox(height: 60),
+                Text(
+                  'Галерея',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20,
                   ),
-                  SizedBox(height: 13),
-                  Container(
-                    height: 215,
-                    child: ListView.separated(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: path.images!.length,
-                      separatorBuilder: (context, index) => SizedBox(width: 10),
-                      itemBuilder: (BuildContext context, int index) {
-                        return GestureDetector(
-                          onTap: () {
-                            Navigator.of(context, rootNavigator: true).push(
-                                MyCustomRoute(
-                                    builder: (context) => FullScreenAlbum(path.images!)));
-                          },
-                          child: Container(
-                            width: 146,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                image: DecorationImage(
-                                    fit: BoxFit.cover,
-                                    image: NetworkImage('http://${ApiService.ip}/${path.images![index]}'))),
-                          ),
-                        );
-                      },
-                    ),
+                ),
+                SizedBox(height: 13),
+                Container(
+                  height: 215,
+                  child: ListView.separated(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: path.images!.length,
+                    separatorBuilder: (context, index) => SizedBox(width: 10),
+                    itemBuilder: (BuildContext context, int index) {
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.of(context, rootNavigator: true).push(
+                              MyCustomRoute(
+                                  builder: (context) =>
+                                      FullScreenAlbum(path.images!)));
+                        },
+                        child: Container(
+                          width: 146,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              image: DecorationImage(
+                                  fit: BoxFit.cover,
+                                  image: NetworkImage(
+                                      'https://${ApiService.ip}/${path.images![index]}'))),
+                        ),
+                      );
+                    },
                   ),
-
-                  SizedBox(height: 26),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                    child: Divider(
-                      thickness: 1.1,
-                      color: Color(0xFFdbdbdb),
-                    ),
+                ),
+                SizedBox(height: 26),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  child: Divider(
+                    thickness: 1.1,
+                    color: Color(0xFFdbdbdb),
                   ),
-
-
-                  SizedBox(height: 20),
-                  if(!widget.checkUserPage && !(widget.email== path.sellerEmail))
+                ),
+                SizedBox(height: 20),
+                if (!widget.checkUserPage &&
+                    !(widget.email == path.sellerEmail))
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 90.0),
                     child: InkWell(
-                      onTap: (){
+                      onTap: () {
                         Navigator.of(context, rootNavigator: true).push(
                             MyCustomRoute(
-                                builder: (context) => ProfileUser(emailUser: path.sellerEmail)));
+                                builder: (context) =>
+                                    ProfileUser(emailUser: path.sellerEmail)));
                       },
                       child: Ink(
-
                         height: 40,
                         decoration: BoxDecoration(
                           color: Color(0xFFFF6B00),
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        child: Center(child: Text('Страница пользователя',style: TextStyle(color: Colors.white,fontSize: 14),)),
+                        child: Center(
+                            child: Text(
+                          'Страница пользователя',
+                          style: TextStyle(color: Colors.white, fontSize: 14),
+                        )),
                       ),
                     ),
                   ),
-                  SizedBox(height: 100),
-                ],
-              );
-
-          }else if (snapshot.hasError) {
-            return Text('${snapshot.error}');;
+                SizedBox(height: 100),
+              ],
+            );
+          } else if (snapshot.hasError) {
+            return Text('${snapshot.error}');
+            ;
           }
 
           // By default, show a loading spinner.
-          return Center(child:  CircularProgressIndicator());
-        },),
-
-
-
+          return Center(child: CircularProgressIndicator());
+        },
+      ),
     );
   }
 

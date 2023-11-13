@@ -1,8 +1,9 @@
+import 'package:petition_ha/service/api_service.dart';
 import 'package:petition_ha/service/local_service.dart';
 
 Future<bool> fetchGetUserEmail() async {
   final response = await LocalService().getUserEmail();
-  print("123456789  " + (response ?? "123"));
+  ApiService.email = response ?? "";
   return response == null || response.isEmpty ? false : true;
 }
 

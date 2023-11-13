@@ -47,7 +47,7 @@ class _InfoPetitionScreenState extends State<InfoPetitionScreen> {
               height: 180,
               width: double.infinity,
               child: Image.network(
-                "http://${ApiService.ip}:${ApiService.port}/uploads/${widget.petition.photo}",
+                "https://${ApiService.ip}:${ApiService.port}/uploads/${widget.petition.photo}",
                 fit: BoxFit.cover,
               ),
             ),
@@ -57,13 +57,32 @@ class _InfoPetitionScreenState extends State<InfoPetitionScreen> {
               style: AppTextStyles.black16Medium,
             ),
             Container(
-              height: MediaQuery.of(context).size.height * 0.3,
+              height: MediaQuery.of(context).size.height * 0.2,
               child: SingleChildScrollView(
                 child: Text(
                   widget.petition.ruDescription ?? "Пусто",
                   style: AppTextStyles.black14,
                 ),
               ),
+            ),
+            SizedBox(height: 10),
+            Text(
+              "Анализ ИИ",
+              style: AppTextStyles.black16,
+            ),
+            SizedBox(height: 5),
+            Container(
+              height: MediaQuery.of(context).size.height * 0.2,
+              child: SingleChildScrollView(
+                child: Text(
+                  'Оценка законопроекта по шкале от 1 до 10 составляет 8. Законопроект предлагает правила и нормы для защиты и благополучия животных, а также для защиты диких животных и их местообитаний. Он также устанавливает обязанности обладателей животных и предусматривает меры надзора и контроля со стороны соответствующих органов. Законопроект также предусматривает наказание за нарушения и проведение образовательных программ по защите прав животных. Он может затронуть многие сферы жизни населения, включая производство, торговлю, образование, медицину и т.д. Он может привести к положительным изменениям в жизни населения, поэтому оценка законопроекта по шкале от 1 до 10 составляет 8.',
+                  // widget.petition.ruDescription ?? "Пусто",
+                  style: AppTextStyles.black14,
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 5,
             ),
             Row(
               children: [
@@ -72,10 +91,12 @@ class _InfoPetitionScreenState extends State<InfoPetitionScreen> {
                     onTap: () {
                       if (widget.petition.isLike == null ||
                           widget.petition.isLike == true) {
+                        if (widget.petition.likeCount! - 1 == 0) {
+                          widget.petition.likeCount =
+                              widget.petition.likeCount! - 1;
+                        }
                         widget.petition.disLikeCount =
                             widget.petition.disLikeCount! + 1;
-                        widget.petition.likeCount =
-                            widget.petition.likeCount! - 1;
                         widget.petition.isLike = false;
                         setState(() {});
                       }
@@ -107,11 +128,13 @@ class _InfoPetitionScreenState extends State<InfoPetitionScreen> {
                   onTap: () {
                     if (widget.petition.isLike == null ||
                         widget.petition.isLike == false) {
+                      if (widget.petition.disLikeCount! - 1 == 0) {
+                        widget.petition.disLikeCount =
+                            widget.petition.disLikeCount! - 1;
+                      }
                       widget.petition.likeCount =
                           widget.petition.likeCount! + 1;
 
-                      widget.petition.disLikeCount =
-                          widget.petition.disLikeCount! - 1;
                       widget.petition.isLike = true;
                       setState(() {});
                     }

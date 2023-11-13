@@ -11,7 +11,7 @@ class PetitionInfoItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.5,
+      height: MediaQuery.of(context).size.height * 0.6,
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: AppColors.white,
@@ -41,28 +41,25 @@ class PetitionInfoItem extends StatelessWidget {
           ),
           Divider(color: AppColors.blue),
           Container(
-            height: 180,
+            height: 160,
             width: double.infinity,
             child: Image.network(
-              "http://${ApiService.ip}:${ApiService.port}/uploads/${petition.photo}",
+              "https://${ApiService.ip}:${ApiService.port}/uploads/${petition.photo}",
               fit: BoxFit.cover,
             ),
           ),
-          Container(
-            child: Text(
-              petition.ruTitle ?? "Пусто",
-              maxLines: 1,
-              style: AppTextStyles.black16Medium,
-            ),
+          Text(
+            petition.ruTitle ?? "Пусто",
+            maxLines: 1,
+            style: AppTextStyles.black16Medium,
           ),
-          Container(
-            child: Text(
-              petition.ruDescription ?? "Пусто",
-              maxLines: 3,
-              style: AppTextStyles.black14,
-            ),
+          Text(
+            overflow: TextOverflow.ellipsis,
+            petition.ruDescription ?? "Пусто",
+            maxLines: 2,
+            style: AppTextStyles.black14,
           ),
-          Divider(color: AppColors.blue),
+          const Divider(color: AppColors.blue),
           StaticVote(
             currentVote: petition.likeCount!,
           ),

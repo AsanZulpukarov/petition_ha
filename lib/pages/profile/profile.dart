@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:petition_ha/amansCreate/test_user/test_user_page.dart';
 import 'package:petition_ha/fetches/local_service_user.dart';
 import 'package:petition_ha/pages/profile/profile_edit.dart';
 import 'package:petition_ha/shared/app_colors.dart';
@@ -108,8 +109,15 @@ class Profile extends StatelessWidget {
                   Icons.newspaper,
                   color: AppColors.blue,
                 ),
-                label: 'Новости',
-                onTap: () {},
+                label: 'Тест',
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => SoruSayfasi(),
+                    ),
+                  );
+                },
               ),
               SizedBox(height: 10),
               ProfileItem(

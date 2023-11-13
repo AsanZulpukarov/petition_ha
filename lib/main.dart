@@ -16,10 +16,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final mediaQueryData = MediaQuery.of(context);
     Widget nextWidget;
-    if (mediaQueryData.accessibleNavigation)
+    if (mediaQueryData.accessibleNavigation) {
       nextWidget = SecondSplashPage();
-    else
+    } else {
       nextWidget = SplashPage();
+    }
     return ScreenUtilInit(
       designSize: const Size(360, 690),
       minTextAdapt: true,

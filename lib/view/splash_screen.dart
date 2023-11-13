@@ -23,9 +23,9 @@ class _SplashPageState extends State<SplashPage> {
   Future<void> _initialize() async {
     checkUser = await _checkSignIn();
     if (checkUser) {
-      Future.delayed(Duration(seconds: 2), () {
+      Future.delayed(Duration(seconds: 3), () {
         Navigator.of(context)
-            .pushReplacement(MaterialPageRoute(builder: (_) => Home()));
+            .pushReplacement(MaterialPageRoute(builder: (_) => SingInScreen()));
       });
     } else {
       Future.delayed(Duration(seconds: 3), () {

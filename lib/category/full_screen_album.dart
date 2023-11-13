@@ -10,10 +10,11 @@ class FullScreenAlbum extends StatefulWidget {
 }
 
 class _FullScreenAlbumState extends State<FullScreenAlbum> {
-
   @override
   Widget build(BuildContext context) {
-    PageController controller=PageController(initialPage: 0,);
+    PageController controller = PageController(
+      initialPage: 0,
+    );
     return Scaffold(
       backgroundColor: Colors.black26,
       appBar: AppBar(
@@ -37,13 +38,11 @@ class _FullScreenAlbumState extends State<FullScreenAlbum> {
         itemBuilder: (context, index) {
           return Container(
             child: PhotoView(
-              minScale: PhotoViewComputedScale.contained,
-                maxScale: PhotoViewComputedScale.covered*2,
-
-              disableGestures: false,
-              imageProvider:
-              NetworkImage('http://${ApiService.ip}/${widget.images[index]}')
-            ),
+                minScale: PhotoViewComputedScale.contained,
+                maxScale: PhotoViewComputedScale.covered * 2,
+                disableGestures: false,
+                imageProvider: NetworkImage(
+                    'https://${ApiService.ip}/${widget.images[index]}')),
           );
         },
         itemCount: widget.images.length,

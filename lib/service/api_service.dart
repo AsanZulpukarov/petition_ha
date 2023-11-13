@@ -430,7 +430,7 @@ class ApiService {
   Future<dynamic> getProfileProducts(String email) async {
     // email=email.replaceAll('@', '%40');
 
-    var url = Uri.parse('http://$ip/Products/Index?email=$email');
+    var url = Uri.parse('https://$ip/Products/Index?email=$email');
     var uri = Uri(
         scheme: scheme,
         host: ip,
@@ -479,7 +479,7 @@ class ApiService {
     print(email);
 
     var url = Uri.parse(
-        'http://$ip/User/SendCodeWordToEmailToConfirmEmail?email=$email');
+        'https://$ip/User/SendCodeWordToEmailToConfirmEmail?email=$email');
     var uri = Uri(
       scheme: scheme,
       host: ip,

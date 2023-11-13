@@ -266,7 +266,7 @@ class _SingInScreenState extends State<SingInScreen> {
                     circular = false;
                     setState(() {});
                     showToast('Вход выполнен!');
-                    await fetchSetUserEmail(email.text);
+                    fetchSetUserEmail(email.text);
                     Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(
                         builder: (_) => Home(),
